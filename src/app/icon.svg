@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Provisional favicon: approved palette + the existing brand connector glyph.
+       Replace with an approved brand asset when provided. -->
+  <rect width="64" height="64" rx="14" fill="#070A11"/>
+  <text x="32" y="45" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="bold" fill="#0EA5E9" text-anchor="middle">&#215;</text>
+</svg>

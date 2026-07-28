@@ -3,6 +3,8 @@
 
 import React, { useState } from 'react';
 import { PortfolioItem } from '@/config/site';
+import { trackEvent } from '@/lib/analytics';
+import { getUtmParams } from '@/lib/utm';
 import { ExternalLink, Globe, Sparkles } from 'lucide-react';
 
 interface PortfolioCardProps {
@@ -17,8 +19,25 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
 
   return (
     <div className="group relative bg-surface border border-surface-border rounded-2xl overflow-hidden hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/10 flex flex-col h-full">
-      {/* Thumbnail Area with Fallback */}
-      <div className="relative aspect-[16/10] w-full bg-slate-900 border-b border-surface-border overflow-hidden flex items-center justify-center">
+      {/* Thumbnail Area with Fallback — clickable to match the hover overlay affordance.
+          Removed from the tab/AT order since the labeled action link below is the
+          canonical link for this card. */}
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={-1}
+        aria-hidden="true"
+        onClick={() =>
+          trackEvent('portfolio_link_click', {
+            location: 'portfolio_thumbnail',
+            project: item.id,
+            destination: item.url,
+            ...getUtmParams(),
+          })
+        }
+        className="relative aspect-[16/10] w-full bg-slate-900 border-b border-surface-border overflow-hidden flex items-center justify-center"
+      >
         {!imageError && item.image ? (
           <img
             src={item.image}
@@ -52,7 +71,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
 
             <div className="flex items-center gap-1 text-xs text-slate-400 z-10">
               <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
-              <span>אתר פעיל וממיר</span>
+              <span>אתר חי</span>
             </div>
           </div>
         )}
@@ -64,7 +83,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
             <ExternalLink className="w-4 h-4" />
           </span>
         </div>
-      </div>
+      </a>
 
       {/* Card Details */}
       <div className="p-6 flex flex-col justify-between flex-grow">
@@ -103,7 +122,15 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`פתוח אתר ${item.title} בטאב חדש`}
+            onClick={() =>
+              trackEvent('portfolio_link_click', {
+                location: 'portfolio',
+                project: item.id,
+                destination: item.url,
+                ...getUtmParams(),
+              })
+            }
+            aria-label={`פתיחת האתר ${item.title} בכרטיסייה חדשה`}
             className="inline-flex items-center justify-between w-full text-sm font-medium text-slate-200 hover:text-brand-accent bg-white/5 hover:bg-white/10 border border-surface-border px-4 py-2.5 rounded-xl transition-all"
           >
             <span>ביקור באתר החי</span>

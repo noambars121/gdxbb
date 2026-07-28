@@ -3,6 +3,8 @@
 import React from 'react';
 import { MessageCircle, Mail, ArrowLeft } from 'lucide-react';
 import { SITE_CONFIG } from '@/config/site';
+import { trackEvent } from '@/lib/analytics';
+import { getUtmParams, useWhatsAppHref } from '@/lib/utm';
 
 interface CTAButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
@@ -10,6 +12,8 @@ interface CTAButtonProps {
   fullWidth?: boolean;
   label?: string;
   type?: 'whatsapp' | 'email';
+  /** Analytics placement context, e.g. hero / header / closing. */
+  location: string;
   className?: string;
 }
 
@@ -19,10 +23,20 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   fullWidth = false,
   label,
   type = 'whatsapp',
+  location,
   className = '',
 }) => {
-  const href = type === 'whatsapp' ? SITE_CONFIG.links.whatsappUrl : SITE_CONFIG.links.mailtoUrl;
-  const defaultLabel = type === 'whatsapp' ? 'אני רוצה הצעת מחיר' : 'שלחו לנו אימייל';
+  const whatsappHref = useWhatsAppHref();
+  const href = type === 'whatsapp' ? whatsappHref : SITE_CONFIG.links.mailtoUrl;
+  const defaultLabel =
+    type === 'whatsapp' ? SITE_CONFIG.cta.primary : SITE_CONFIG.cta.email;
+
+  const handleClick = (): void => {
+    trackEvent(type === 'whatsapp' ? 'whatsapp_cta_click' : 'email_cta_click', {
+      location,
+      ...getUtmParams(),
+    });
+  };
 
   const baseStyles =
     'inline-flex items-center justify-center font-medium transition-all duration-200 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]';
@@ -30,7 +44,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   const sizeStyles = {
     sm: 'px-4 py-2 text-sm gap-2',
     md: 'px-6 py-3.5 text-base gap-2.5 shadow-lg',
-    lg: 'px-8 py-4 text-lg gap-3 shadow-xl',
+    lg: 'px-6 sm:px-8 py-4 text-base sm:text-lg gap-3 shadow-xl',
   };
 
   const variantStyles = {
@@ -49,7 +63,10 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       href={href}
       target={type === 'whatsapp' ? '_blank' : undefined}
       rel={type === 'whatsapp' ? 'noopener noreferrer' : undefined}
-      aria-label={label || defaultLabel}
+      onClick={handleClick}
+      aria-label={`${label || defaultLabel}${
+        type === 'whatsapp' ? ' (נפתח בכרטיסייה חדשה)' : ''
+      }`}
       className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${widthStyle} ${className}`}
     >
       {type === 'whatsapp' ? (
@@ -58,7 +75,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         <Mail className="w-5 h-5 text-sky-400 shrink-0" aria-hidden="true" />
       )}
       <span>{label || defaultLabel}</span>
-      <ArrowLeft className="w-4 h-4 rtl:rotate-0 rotate-180 opacity-70 group-hover:translate-x-[-2px] transition-transform shrink-0" aria-hidden="true" />
+      <ArrowLeft className="w-4 h-4 opacity-70 shrink-0" aria-hidden="true" />
     </a>
   );
 };

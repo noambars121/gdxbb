@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Heebo, Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const heebo = Heebo({
@@ -14,6 +15,8 @@ const inter = Inter({
   display: 'swap',
 });
 
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -21,21 +24,28 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Gemini Digital × BarsBuild | ארכיטקטורת ואינטגרציית אתרי פרימיום',
+  metadataBase: new URL('https://gdxbb.vercel.app'),
+  title: 'GD × BB | סטודיו לאתרי המרה ותשתיות צמיחה לעסקים בישראל',
   description:
-    'שילוב הכוחות של Gemini Digital ו-BarsBuild: אתרי תדמית ומכירה בעלי ארכיטקטורה מתקדמת, מהירות טעינה פנומנלית, וחוויית משתמש ממירה לעסקים שרוצים תוצאות.',
+    'Gemini Digital × BarsBuild בונים אתרי פרימיום לעסקים רציניים בישראל — ממוקדי המרה, מהירים ומותאמים לייצר פניות איכותיות. שיחת התאמה ללא התחייבות.',
   keywords: [
     'Gemini Digital',
     'BarsBuild',
-    'פיתוח אתרים',
-    'בניית אתרים',
-    'אתר תדמית',
-    'UX Architecture',
-    'Next.js',
-    'Tailwind CSS',
-    'RTL Website',
+    'סטודיו לאתרי המרה',
+    'בניית אתרים לעסקים',
+    'אתר תדמית ממיר',
+    'דף נחיתה לקמפיינים',
   ],
   robots: 'index, follow',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'he_IL',
+    siteName: 'GD × BB',
+    title: 'GD × BB | אתרי המרה לעסקים רציניים',
+    description: 'אסטרטגיית המרה + פיתוח מדויק. צוות אחד. תוצאות מדידות.',
+    // og:image intentionally omitted — no approved image asset exists yet.
+  },
 };
 
 export default function RootLayout({
@@ -47,6 +57,20 @@ export default function RootLayout({
     <html lang="he" dir="rtl" className={`${heebo.variable} ${inter.variable}`}>
       <body className="bg-background text-slate-100 font-hebrew antialiased selection:bg-brand-accent selection:text-white">
         {children}
+        {gaMeasurementId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaMeasurementId}');`}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );

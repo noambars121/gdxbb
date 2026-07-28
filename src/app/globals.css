@@ -30,6 +30,11 @@
     outline-offset: 4px;
     border-radius: 4px;
   }
+
+  /* Anchor targets clear the sticky header (h-20) when navigated to */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 /* Reduced Motion Respect */

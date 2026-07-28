@@ -1,94 +1,83 @@
 'use client';
 
 import React from 'react';
-import { Cpu, Layout, Sparkles, CheckCircle2 } from 'lucide-react';
+import { UserSearch, Route, Rocket } from 'lucide-react';
 
+/** Section 3 — The Mechanism. Three phases first; partnership attribution beneath. */
 export const SolutionSection: React.FC = () => {
+  const phases = [
+    {
+      num: '1',
+      icon: UserSearch,
+      title: 'מבינים את הלקוח',
+      description: 'מגדירים מי צריך להגיע, מה חשוב לו, ומה גורם לו לבחור.',
+    },
+    {
+      num: '2',
+      icon: Route,
+      title: 'בונים מסלול המרה',
+      description: 'מסרים, היררכיה, עיצוב וקריאות לפעולה שמניעים את האדם הנכון לשיחה.',
+    },
+    {
+      num: '3',
+      icon: Rocket,
+      title: 'מוציאים לפועל בלי פשרות',
+      description: 'אתר מהיר, מותאם למובייל, נגיש וקל להמשך צמיחה.',
+    },
+  ];
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/40 border-t border-surface-border relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs font-semibold text-brand-accent bg-brand-accent/10 border border-brand-accent/20 px-3 py-1 rounded-full uppercase tracking-wider">
             הפתרון המשולב
           </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-white mt-4 mb-4">
-            שילוב הכוחות: Gemini Digital × BarsBuild
+          <h2 className="text-2xl sm:text-4xl font-bold text-white mt-4">
+            כך בונים אתר שעובד בשביל העסק
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            איחדנו את המומחיות בעיצוב וארכיטקטורת חוויית משתמש (Gemini Digital) יחד עם יכולות פיתוח ואינטגרציה מתקדמות (BarsBuild) כדי ליצור מוצר דיגיטלי מושלם.
-          </p>
         </div>
 
-        {/* Dual Pillar Comparison Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Pillar 1: Gemini Digital */}
-          <div className="bg-surface border border-surface-border p-8 rounded-2xl relative group hover:border-brand-accent/40 transition-all duration-300">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-brand-accent/10 border border-brand-accent/20 rounded-xl text-brand-accent">
-                <Layout className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xs text-brand-accent font-mono uppercase font-bold">Design & UX Architecture</span>
-                <h3 className="text-2xl font-bold text-white font-sans">Gemini Digital</h3>
-              </div>
-            </div>
+        {/* Core statement */}
+        <p className="text-center text-lg sm:text-2xl text-slate-200 font-medium max-w-3xl mx-auto mb-14 leading-relaxed">
+          Gemini Digital <span className="text-brand-accent">×</span> BarsBuild מחברים
+          אסטרטגיית המרה, חוויית משתמש ופיתוח מדויק למערכת אחת.
+        </p>
 
-            <ul className="space-y-3 text-slate-300 text-sm sm:text-base">
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                <span>ארכיטקטורת חוויית משתמש (UX) ממוקדת המרות ומניעת נטישה.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                <span>שפה ויזואלית יוקרתית (Dark Premium) בעלת זהות ייחודית.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                <span>קופיקראפטינג עברי מדויק ומיקוד פסיכולוגי בכל סקשן.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Pillar 2: BarsBuild */}
-          <div className="bg-surface border border-surface-border p-8 rounded-2xl relative group hover:border-emerald-400/40 transition-all duration-300">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-emerald-400/10 border border-emerald-400/20 rounded-xl text-emerald-400">
-                <Cpu className="w-6 h-6" />
+        {/* Three-phase mechanism */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {phases.map((phase) => {
+            const Icon = phase.icon;
+            return (
+              <div
+                key={phase.num}
+                className="bg-surface border border-surface-border p-8 rounded-2xl relative group hover:border-brand-accent/40 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-brand-accent/10 border border-brand-accent/20 rounded-xl text-brand-accent">
+                    <Icon className="w-6 h-6" aria-hidden="true" />
+                  </div>
+                  <span className="font-sans font-extrabold text-3xl text-slate-700 group-hover:text-brand-accent/40 transition-colors">
+                    {phase.num}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">
+                  {phase.title}
+                </h3>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  {phase.description}
+                </p>
               </div>
-              <div>
-                <span className="text-xs text-emerald-400 font-mono uppercase font-bold">Engineering & Performance</span>
-                <h3 className="text-2xl font-bold text-white font-sans">BarsBuild</h3>
-              </div>
-            </div>
-
-            <ul className="space-y-3 text-slate-300 text-sm sm:text-base">
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <span>פיתוח ב-Next.js, React ו-TypeScript לביצועים פנומנליים.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <span>טעינה סטטית מהירה במיוחד ללא תלות בבסיסי נתונים כבדים.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <span>קוד נקי, מודולרי ונגיש (WCAG AA) המותאם לכל המכשירים.</span>
-              </li>
-            </ul>
-          </div>
+            );
+          })}
         </div>
 
-        {/* Combined Power Banner */}
-        <div className="bg-gradient-to-r from-surface via-slate-900 to-surface border border-brand-accent/20 p-6 sm:p-8 rounded-2xl text-center flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-right">
-            <Sparkles className="w-8 h-8 text-brand-accent shrink-0 hidden sm:block" />
-            <div>
-              <div className="text-lg font-bold text-white">התוצאה: אתר שטוען מתי שמוקש וממיר גולשים ללקוחות משלמים</div>
-              <p className="text-sm text-slate-400">ללא חוב טכנולוגי, ללא תקלות וללא מורכבות מיותרת.</p>
-            </div>
-          </div>
-        </div>
+        {/* Partnership attribution — beneath the mechanism, not above it */}
+        <p className="text-center text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Gemini Digital מובילים את אסטרטגיית ההמרה והמסרים. BarsBuild בונים את המערכת
+          הדיגיטלית שמוציאה אותה לפועל.
+        </p>
       </div>
     </section>
   );

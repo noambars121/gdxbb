@@ -5,32 +5,54 @@ export interface PortfolioItem {
   url: string;
   category: string;
   description: string;
+  /**
+   * Screenshot path under /public. Set only when the real asset file exists
+   * (e.g. '/portfolio/santimarzi.png') — a missing file causes 404s and a
+   * broken-image race before hydration. Cards render a typographic fallback
+   * while unset.
+   */
   image?: string;
   tags: string[];
 }
 
+const WHATSAPP_MESSAGE =
+  'שלום, אני רוצה לבדוק האם האתר שלי באמת בנוי להביא יותר פניות איכותיות. (הגעתי מהאתר GD×BB)';
+
 export const SITE_CONFIG = {
   brandName: 'Gemini Digital × BarsBuild',
-  tagline: 'ארכיטקטורת ואינטגרציית בדיקות, פיתוח וסגירת חוויית משתמש מקצה לקצה',
+  shortName: 'GD × BB',
+  categoryLabel: 'סטודיו לאתרי המרה ותשתיות צמיחה',
   contact: {
     whatsapp: '972555073405',
-    whatsappMessage: 'שלום, אני מעוניין לשמוע על השירותים של GD × BB',
+    phoneDisplay: '055-507-3405',
+    whatsappMessage: WHATSAPP_MESSAGE,
     email: 'BarsBuild@gmail.com',
   },
   links: {
-    whatsappUrl: `https://wa.me/972555073405?text=${encodeURIComponent('שלום, אני מעוניין לשמוע על השירותים של GD × BB')}`,
+    whatsappUrl: `https://wa.me/972555073405?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
     mailtoUrl: `mailto:BarsBuild@gmail.com?subject=${encodeURIComponent('פנייה מהאתר - GD × BB')}`,
   },
+  cta: {
+    primary: 'בדקו אם האתר שלכם בנוי להביא פניות',
+    closing: 'שלחו לנו את האתר לבדיקה',
+    sticky: 'בדקו את האתר שלכם ב-WhatsApp',
+    email: 'שליחת הודעה באימייל',
+    trustMicrocopy: 'שיחת התאמה קצרה · ללא התחייבות · תשובה תוך יום עסקים',
+  },
+  nav: [
+    { label: 'איך זה עובד', href: '#how-it-works' },
+    { label: 'פרויקטים', href: '#portfolio' },
+  ],
   portfolio: [
     {
       id: 'santimarzi',
       title: 'סנטי מרזי',
       titleEn: 'Santi Marzi',
-      url: 'https://santimarzi.com',
+      url: 'https://santimarzi.vercel.app',
       category: 'מותג אופנה ויוקרה',
-      description: 'אתר מותג יוקרתי בעל ארכיטקטורה מהירה, חוויית משתמש אלגנטית והתאמה מושלמת למובייל.',
-      image: '/portfolio/santimarzi.png',
-      tags: ['Next.js', 'E-Commerce', 'UX/UI', 'High Speed'],
+      description:
+        'אתר מותג יוקרתי עם ארכיטקטורה מהירה, חוויית משתמש אלגנטית והתאמה מושלמת למובייל.',
+      tags: ['Next.js', 'E-Commerce', 'UX/UI'],
     },
     {
       id: 'pizabuenna',
@@ -38,9 +60,9 @@ export const SITE_CONFIG = {
       titleEn: 'Pizza Buena',
       url: 'https://pizabuenna.com',
       category: 'מסעדנות ומזון',
-      description: 'מערכת הזמנות דיגיטלית מהירה, ממשק תפריט חכם וממיר במיוחד המותאם לנייד.',
-      image: '/portfolio/pizabuenna.png',
-      tags: ['Online Ordering', 'Mobile-First', 'Fast UX'],
+      description:
+        'מערכת הזמנות דיגיטלית מהירה עם ממשק תפריט חכם ומסלול ברור מהתפריט לפעולה.',
+      tags: ['Online Ordering', 'Mobile-First'],
     },
     {
       id: 'cinemus',
@@ -48,9 +70,9 @@ export const SITE_CONFIG = {
       titleEn: 'Cinemus',
       url: 'https://cinemus.app',
       category: 'פלטפורמת מדיה ובידור',
-      description: 'אפליקציית ווב מתקדמת לחוויות תוכן אינטראקטיביות עם מעברים חלקים ועיצוב כהה מודרני.',
-      image: '/portfolio/cinemus.png',
-      tags: ['Web App', 'Dark UI', 'Interactive', 'Media'],
+      description:
+        'אפליקציית ווב מתקדמת לחוויות תוכן אינטראקטיביות עם מעברים חלקים ועיצוב כהה מודרני.',
+      tags: ['Web App', 'Dark UI', 'Interactive'],
     },
     {
       id: 'graffitidesign',
@@ -58,19 +80,9 @@ export const SITE_CONFIG = {
       titleEn: 'Graffiti Design',
       url: 'https://graffitidesign.vercel.app',
       category: 'סטודיו לעיצוב וקריאייטיב',
-      description: 'תיק עבודות דינמי עם טיפוגרפיה נועזת, ביצועי טעינה מיידיים ומבנה נקי.',
-      image: '/portfolio/graffitidesign.png',
-      tags: ['Design Studio', 'Vercel', 'Creative Showcase'],
-    },
-    {
-      id: 'bybengg',
-      title: 'ByBengg',
-      titleEn: 'ByBengg',
-      url: 'https://bybengg.vercel.app',
-      category: 'מותג לייפסטייל ומוצרים',
-      description: 'חנות קטלוג מודרנית עם דגש על תמונות ברזולוציה גבוהה, תגובתיות מהירה ויחס המרה גבוה.',
-      image: '/portfolio/bybengg.png',
-      tags: ['Product Catalog', 'UX Architecture', 'Performance'],
+      description:
+        'תיק עבודות דינמי עם טיפוגרפיה נועזת, ביצועי טעינה מיידיים ומבנה נקי.',
+      tags: ['Design Studio', 'Creative Showcase'],
     },
     {
       id: 'barsbuild',
@@ -78,9 +90,9 @@ export const SITE_CONFIG = {
       titleEn: 'BarsBuild',
       url: 'https://barsbuild.me',
       category: 'פלטפורמת פיתוח ואינטגרציה',
-      description: 'אתר בית טכנולוגי המציג פתרונות בנייה ואינטגרציה מותאמים אישית לעסקים וחברות.',
-      image: '/portfolio/barsbuild.png',
-      tags: ['Tech Platform', 'Custom Build', 'Full Stack'],
+      description:
+        'אתר בית טכנולוגי המציג פתרונות בנייה ואינטגרציה מותאמים אישית לעסקים.',
+      tags: ['Tech Platform', 'Full Stack'],
     },
   ] as PortfolioItem[],
 };

@@ -1,66 +1,71 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { SITE_CONFIG } from '@/config/site';
-import { MessageCircle, Mail, ExternalLink, ShieldCheck } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
+import { getUtmParams, useWhatsAppHref } from '@/lib/utm';
+import { MessageCircle, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const whatsappHref = useWhatsAppHref();
+
   return (
     <footer className="w-full bg-background border-t border-surface-border py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Brand Info */}
+        {/* Brand + Category Label */}
         <div className="flex flex-col items-center md:items-start text-center md:text-right gap-2">
           <div className="font-sans font-bold text-xl text-white">
             Gemini Digital <span className="text-brand-accent">×</span> BarsBuild
           </div>
-          <p className="text-sm text-slate-400 max-w-md">
-            שותפות טכנולוגית אסטרטגית לבניית אתרי פרימיום בעלי ארכיטקטורה מתקדמת, ביצועים ללא פשרות ויחס המרה ממקסם.
-          </p>
+          <p className="text-sm text-slate-400 max-w-md">{SITE_CONFIG.categoryLabel}</p>
         </div>
 
         {/* Direct Contact Links */}
         <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-300">
           <a
-            href={SITE_CONFIG.links.whatsappUrl}
+            href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent('whatsapp_cta_click', { location: 'footer', ...getUtmParams() })
+            }
+            aria-label={`WhatsApp: ${SITE_CONFIG.contact.phoneDisplay} (נפתח בכרטיסייה חדשה)`}
             className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-400" />
-            <span>055-507-3405</span>
+            <MessageCircle className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+            <span>{SITE_CONFIG.contact.phoneDisplay}</span>
           </a>
           <a
             href={SITE_CONFIG.links.mailtoUrl}
+            onClick={() =>
+              trackEvent('email_cta_click', { location: 'footer', ...getUtmParams() })
+            }
             className="flex items-center gap-2 hover:text-sky-400 transition-colors"
           >
-            <Mail className="w-4 h-4 text-sky-400" />
-            <span>BarsBuild@gmail.com</span>
+            <Mail className="w-4 h-4 text-sky-400" aria-hidden="true" />
+            <span>{SITE_CONFIG.contact.email}</span>
           </a>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-        <div className="flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>© {new Date().getFullYear()} Gemini Digital × BarsBuild. כל הזכויות שמורות. v1.0.0</span>
-        </div>
-        <div className="flex items-center gap-4 text-slate-500">
-          <a
-            href="#privacy-notice"
-            className="hover:text-slate-300 transition-colors"
-            title="הצהרת פרטיות לאתר סטטי"
+        <span>
+          © {new Date().getFullYear()} Gemini Digital × BarsBuild. כל הזכויות שמורות.
+        </span>
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-right">
+          <span>
+            פנייה דרך האתר מתבצעת ישירות ב-WhatsApp או אימייל. מידע שנמסר בפנייה ישמש
+            לצורך מתן מענה בלבד.
+          </span>
+          <Link
+            href="/privacy"
+            className="underline underline-offset-4 hover:text-slate-300 transition-colors whitespace-nowrap"
           >
             מדיניות פרטיות
-          </a>
-          <span>•</span>
-          <span>Static High-Performance RTL Architecture</span>
+          </Link>
         </div>
-      </div>
-
-      {/* Static Privacy Notice Box */}
-      <div id="privacy-notice" className="max-w-7xl mx-auto mt-4 text-[11px] text-slate-500 text-center sm:text-right border-t border-white/5 pt-3">
-        אתר v1.0.0 הנו אתר תדמית סטטי. האתר אינו עושה שימוש בקוקיז (Cookies), אינו כולל מערכות מעקב ואינו אוסף מידע אישי. פנייה מתבצעת ישירות ב-WhatsApp/Email. למדיניות פרטיות מלאה לקראת דיפלוי פרודקשן, יש לספק מסמך ייעודי.
       </div>
     </footer>
   );

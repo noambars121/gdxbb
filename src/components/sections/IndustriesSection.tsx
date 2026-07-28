@@ -1,30 +1,30 @@
 'use client';
 
 import React from 'react';
-import { ShoppingBag, Utensils, AppWindow, Building2 } from 'lucide-react';
+import { Scale, Stethoscope, MapPin } from 'lucide-react';
 
+/** Section 7 — Industry Fit. The three priority verticals only, then the technical standards strip. */
 export const IndustriesSection: React.FC = () => {
-  const sectors = [
+  const verticals = [
     {
-      icon: ShoppingBag,
-      title: 'מותגי אופנה, לייפסטייל ו-E-Commerce',
-      description: 'קטלוגים מרהיבים, טעינת תמונות מהירה וחוויית קנייה מותאמת מובייל.',
+      icon: Scale,
+      title: 'משרדי עורכי דין ושירותים מקצועיים',
     },
     {
-      icon: Utensils,
-      title: 'מסעדות, קולינריה ומזון',
-      description: 'תפריטים דיגיטליים אינטראקטיביים ומערכות פנייה ישירות לחוויה קלה.',
+      icon: Stethoscope,
+      title: 'קליניקות ועסקים מבוססי פגישות',
     },
     {
-      icon: AppWindow,
-      title: 'אפליקציות ומוצרי דיגיטל',
-      description: 'אתרי Landing Page טכנולוגיים המציגים מוצרים בצורה מעוררת אמון.',
+      icon: MapPin,
+      title: 'עסקים מקומיים עם שירות או פרויקט בעל ערך גבוה',
     },
-    {
-      icon: Building2,
-      title: 'עסקים B2B ונותני שירותים',
-      description: 'אתרי תדמית יוקרתיים בעלי מסלול המרה ישיר מול לקוחות קצה.',
-    },
+  ];
+
+  const standards = [
+    'Mobile-first',
+    'נגישות WCAG AA',
+    'קוד מותאם אישית',
+    'תשתית מוכנה לצמיחה',
   ];
 
   return (
@@ -35,36 +35,44 @@ export const IndustriesSection: React.FC = () => {
           <span className="text-xs font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-3 py-1 rounded-full uppercase tracking-wider">
             התאמה לעסקים
           </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-white mt-4 mb-4">
-            פתרונות מותאמים לפי תחום הפעילות שלכם
+          <h2 className="text-2xl sm:text-4xl font-bold text-white mt-4">
+            בנוי לעסקים שבהם כל פנייה שווה כסף אמיתי
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg">
-            אנחנו מביאים ניסיון מוכח במגוון תעשיות ומבינים את הדרישות הייחודיות של כל שוק.
-          </p>
         </div>
 
-        {/* Sectors Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sectors.map((sector, idx) => {
-            const Icon = sector.icon;
+        {/* Vertical Cards — exactly three */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {verticals.map((vertical, idx) => {
+            const Icon = vertical.icon;
             return (
               <div
                 key={idx}
-                className="bg-surface border border-surface-border p-6 rounded-2xl group hover:border-emerald-400/50 transition-all duration-300"
+                className="bg-surface border border-surface-border p-8 rounded-2xl group hover:border-emerald-400/50 transition-all duration-300 flex flex-col items-center text-center gap-4"
               >
-                <div className="p-3 bg-emerald-400/10 border border-emerald-400/20 rounded-xl text-emerald-400 w-fit mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className="w-6 h-6" />
+                <div className="p-3 bg-emerald-400/10 border border-emerald-400/20 rounded-xl text-emerald-400 w-fit group-hover:scale-110 transition-transform">
+                  <Icon className="w-6 h-6" aria-hidden="true" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
-                  {sector.title}
+                <h3 className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors leading-snug">
+                  {vertical.title}
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  {sector.description}
-                </p>
               </div>
             );
           })}
         </div>
+
+        {/* Technical standards strip */}
+        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-slate-400">
+          {standards.map((item, idx) => (
+            <React.Fragment key={item}>
+              {idx > 0 && (
+                <li aria-hidden="true" className="text-slate-600">
+                  ·
+                </li>
+              )}
+              <li>{item}</li>
+            </React.Fragment>
+          ))}
+        </ul>
       </div>
     </section>
   );
