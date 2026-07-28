@@ -7,12 +7,14 @@ export interface PortfolioItem {
   description: string;
   /**
    * Screenshot path under /public. Set only when the real asset file exists
-   * (e.g. '/portfolio/santimarzi.png') — a missing file causes 404s and a
+   * (e.g. '/portfolio/santimarzi.webp') — a missing file causes 404s and a
    * broken-image race before hydration. Cards render a typographic fallback
    * while unset.
    */
   image?: string;
   tags: string[];
+  /** Featured projects render as primary proof cards (brief v2 Block 4). */
+  featured: boolean;
 }
 
 const WHATSAPP_MESSAGE =
@@ -26,11 +28,11 @@ export const SITE_CONFIG = {
     whatsapp: '972555073405',
     phoneDisplay: '055-507-3405',
     whatsappMessage: WHATSAPP_MESSAGE,
-    email: 'BarsBuild@gmail.com',
+    email: 'geminidigital.ads@gmail.com',
   },
   links: {
     whatsappUrl: `https://wa.me/972555073405?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
-    mailtoUrl: `mailto:BarsBuild@gmail.com?subject=${encodeURIComponent('פנייה מהאתר - GD × BB')}`,
+    mailtoUrl: `mailto:geminidigital.ads@gmail.com?subject=${encodeURIComponent('פנייה מהאתר - GD × BB')}`,
   },
   cta: {
     primary: 'בדקו אם האתר שלכם בנוי להביא פניות',
@@ -43,6 +45,11 @@ export const SITE_CONFIG = {
     { label: 'איך זה עובד', href: '#how-it-works' },
     { label: 'פרויקטים', href: '#portfolio' },
   ],
+  /**
+   * Featured order matters (brief v2 Block 4): Santi Marzi, Pizza Buena,
+   * BarsBuild. Cinemus and Graffiti Design are secondary — reachable behind
+   * the "עוד פרויקטים" toggle, never as primary cards.
+   */
   portfolio: [
     {
       id: 'santimarzi',
@@ -53,6 +60,7 @@ export const SITE_CONFIG = {
       description:
         'אתר מותג יוקרתי עם ארכיטקטורה מהירה, חוויית משתמש אלגנטית והתאמה מושלמת למובייל.',
       tags: ['Next.js', 'E-Commerce', 'UX/UI'],
+      featured: true,
     },
     {
       id: 'pizabuenna',
@@ -63,26 +71,7 @@ export const SITE_CONFIG = {
       description:
         'מערכת הזמנות דיגיטלית מהירה עם ממשק תפריט חכם ומסלול ברור מהתפריט לפעולה.',
       tags: ['Online Ordering', 'Mobile-First'],
-    },
-    {
-      id: 'cinemus',
-      title: 'Cinemus',
-      titleEn: 'Cinemus',
-      url: 'https://cinemus.app',
-      category: 'פלטפורמת מדיה ובידור',
-      description:
-        'אפליקציית ווב מתקדמת לחוויות תוכן אינטראקטיביות עם מעברים חלקים ועיצוב כהה מודרני.',
-      tags: ['Web App', 'Dark UI', 'Interactive'],
-    },
-    {
-      id: 'graffitidesign',
-      title: 'Graffiti Design',
-      titleEn: 'Graffiti Design',
-      url: 'https://graffitidesign.vercel.app',
-      category: 'סטודיו לעיצוב וקריאייטיב',
-      description:
-        'תיק עבודות דינמי עם טיפוגרפיה נועזת, ביצועי טעינה מיידיים ומבנה נקי.',
-      tags: ['Design Studio', 'Creative Showcase'],
+      featured: true,
     },
     {
       id: 'barsbuild',
@@ -93,6 +82,29 @@ export const SITE_CONFIG = {
       description:
         'אתר בית טכנולוגי המציג פתרונות בנייה ואינטגרציה מותאמים אישית לעסקים.',
       tags: ['Tech Platform', 'Full Stack'],
+      featured: true,
+    },
+    {
+      id: 'cinemus',
+      title: 'Cinemus',
+      titleEn: 'Cinemus',
+      url: 'https://cinemus.app',
+      category: 'פלטפורמת מדיה ובידור',
+      description:
+        'אפליקציית ווב מתקדמת לחוויות תוכן אינטראקטיביות עם מעברים חלקים ועיצוב מודרני.',
+      tags: ['Web App', 'Interactive'],
+      featured: false,
+    },
+    {
+      id: 'graffitidesign',
+      title: 'Graffiti Design',
+      titleEn: 'Graffiti Design',
+      url: 'https://graffitidesign.vercel.app',
+      category: 'סטודיו לעיצוב וקריאייטיב',
+      description:
+        'תיק עבודות דינמי עם טיפוגרפיה נועזת, ביצועי טעינה מיידיים ומבנה נקי.',
+      tags: ['Design Studio', 'Creative Showcase'],
+      featured: false,
     },
   ] as PortfolioItem[],
 };

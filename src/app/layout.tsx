@@ -21,9 +21,11 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  themeColor: '#F7F5F2',
 };
 
 export const metadata: Metadata = {
+  // Staging base URL — production domain is TBD (Kain purchases before launch).
   metadataBase: new URL('https://gdxbb.vercel.app'),
   title: 'GD × BB | סטודיו לאתרי המרה ותשתיות צמיחה לעסקים בישראל',
   description:
@@ -55,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl" className={`${heebo.variable} ${inter.variable}`}>
-      <body className="bg-background text-slate-100 font-hebrew antialiased selection:bg-brand-accent selection:text-white">
+      <body className="bg-page text-ink font-hebrew antialiased selection:bg-accent-cyan selection:text-ink">
         {children}
         {gaMeasurementId ? (
           <>

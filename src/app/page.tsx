@@ -4,47 +4,41 @@ import { Footer } from '@/components/common/Footer';
 import { MobileStickyCTA } from '@/components/common/MobileStickyCTA';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { ProblemSection } from '@/components/sections/ProblemSection';
-import { SolutionSection } from '@/components/sections/SolutionSection';
-import { ServicesSection } from '@/components/sections/ServicesSection';
+import { IntegratedSystemSection } from '@/components/sections/IntegratedSystemSection';
 import { PortfolioSection } from '@/components/sections/PortfolioSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
-import { IndustriesSection } from '@/components/sections/IndustriesSection';
 import { ClosingCTASection } from '@/components/sections/ClosingCTASection';
 
+/**
+ * Six conversion blocks + footer (rebuild brief v2.0.0, Section 2).
+ * Section backgrounds alternate between --bg-primary and white (§1.4);
+ * the footer is the only dark surface.
+ */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-slate-100 flex flex-col font-hebrew pb-[calc(6rem_+_env(safe-area-inset-bottom))] md:pb-0">
-      {/* Sticky Header with minimal 3-item navigation */}
+    <div className="min-h-screen bg-page text-ink flex flex-col font-hebrew pb-[calc(6rem_+_env(safe-area-inset-bottom))] md:pb-0">
       <Header />
 
-      {/* Single continuous scroll — section order per the rebuild brief */}
       <main className="flex-grow">
-        {/* 1. Hero */}
+        {/* Block 1 — Hero (incl. ICP qualifier + trust strip) */}
         <HeroSection />
 
-        {/* 2. Cost of Inaction */}
+        {/* Block 2 — The Cost of the Problem */}
         <ProblemSection />
 
-        {/* 3. The Mechanism */}
-        <SolutionSection />
+        {/* Block 3 — The Integrated System (steps + services) */}
+        <IntegratedSystemSection />
 
-        {/* 4. Offer */}
-        <ServicesSection />
-
-        {/* 5. Proof / Portfolio */}
+        {/* Block 4 — Selected Live Work */}
         <PortfolioSection />
 
-        {/* 6. Process */}
+        {/* Block 5 — How the Engagement Works */}
         <HowItWorksSection />
 
-        {/* 7. Industry Fit */}
-        <IndustriesSection />
-
-        {/* 8. Qualification CTA */}
+        {/* Block 6 — Final Diagnostic CTA */}
         <ClosingCTASection />
       </main>
 
-      {/* 9. Footer */}
       <Footer />
 
       {/* Mobile-only fixed bottom WhatsApp CTA */}
