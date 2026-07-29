@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
                 Gemini Digital <span className="text-accent-gold font-light">×</span> BarsBuild
               </span>
             </span>
-            <span className="hidden sm:block text-xs text-muted font-hebrew">
+            <span className="hidden sm:block text-meta text-muted font-hebrew leading-[1.55]">
               {SITE_CONFIG.categoryLabel}
             </span>
           </div>

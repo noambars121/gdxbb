@@ -19,11 +19,11 @@ export const Footer: React.FC = () => {
           <div className="font-sans font-bold text-xl text-paper">
             Gemini Digital <span className="text-accent-gold">×</span> BarsBuild
           </div>
-          <p className="text-sm text-paper/45 max-w-md">{SITE_CONFIG.categoryLabel}</p>
+          <p className="text-base text-paper/45 max-w-md leading-[1.55]">{SITE_CONFIG.categoryLabel}</p>
         </div>
 
         {/* Direct Contact Links */}
-        <div className="flex flex-wrap justify-center gap-6 text-sm text-paper/65">
+        <div className="flex flex-wrap justify-center gap-6 text-base text-paper/65">
           <a
             href={whatsappHref}
             target="_blank"
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between text-xs text-paper/40 gap-4">
+      <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between text-meta text-paper/40 gap-4 leading-[1.55]">
         <span>
           © {new Date().getFullYear()} Gemini Digital × BarsBuild. כל הזכויות שמורות.
         </span>
