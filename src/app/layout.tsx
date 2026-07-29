@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Heebo, Inter } from 'next/font/google';
+import { Heebo } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
 const heebo = Heebo({
   subsets: ['hebrew', 'latin'],
+  weight: ['400', '500', '700', '800'],
   variable: '--font-heebo',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -21,11 +16,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#F7F4EE',
+  themeColor: '#111827',
 };
 
 export const metadata: Metadata = {
-  // Staging base URL — production domain is TBD (Kain purchases before launch).
   metadataBase: new URL('https://gdxbb.vercel.app'),
   title: 'GD × BB | סטודיו לאתרי המרה ותשתיות צמיחה לעסקים בישראל',
   description:
@@ -46,7 +40,6 @@ export const metadata: Metadata = {
     siteName: 'GD × BB',
     title: 'GD × BB | אתרי המרה לעסקים רציניים',
     description: 'אסטרטגיית המרה + פיתוח מדויק. צוות אחד. תוצאות מדידות.',
-    // og:image intentionally omitted — no approved image asset exists yet.
   },
 };
 
@@ -56,8 +49,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} ${inter.variable}`}>
-      <body className="bg-paper text-text font-hebrew antialiased selection:bg-accent-blue selection:text-ink">
+    <html lang="he" dir="rtl">
+      <body className={`${heebo.variable} font-sans antialiased`}>
         {children}
         {gaMeasurementId ? (
           <>

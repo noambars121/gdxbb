@@ -1,48 +1,23 @@
-import React from 'react';
-import { Header } from '@/components/common/Header';
-import { Footer } from '@/components/common/Footer';
-import { MobileStickyCTA } from '@/components/common/MobileStickyCTA';
-import { HeroSection } from '@/components/sections/HeroSection';
-import { ProblemSection } from '@/components/sections/ProblemSection';
-import { IntegratedSystemSection } from '@/components/sections/IntegratedSystemSection';
-import { PortfolioSection } from '@/components/sections/PortfolioSection';
-import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
-import { ClosingCTASection } from '@/components/sections/ClosingCTASection';
+import { Nav } from '@/components/blocks/Nav';
+import { HeroBlock } from '@/components/blocks/HeroBlock';
+import { ProblemBlock } from '@/components/blocks/ProblemBlock';
+import { ProofBlock } from '@/components/blocks/ProofBlock';
+import { SystemBlock } from '@/components/blocks/SystemBlock';
+import { ProcessBlock } from '@/components/blocks/ProcessBlock';
+import { CTABlock } from '@/components/blocks/CTABlock';
+import { Footer } from '@/components/blocks/Footer';
 
-/**
- * Six conversion blocks + footer (rebuild brief v2.0.0, Section 2).
- * Dark authority hybrid (dev_2.1): ink at entry, system, process, and close;
- * paper/surface for explanation and proof; footer at #090E17.
- */
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-paper text-text flex flex-col font-hebrew pb-[calc(6rem_+_env(safe-area-inset-bottom))] md:pb-0">
-      <Header />
-
-      <main className="flex-grow">
-        {/* Block 1 — Hero (incl. ICP qualifier + trust strip) */}
-        <HeroSection />
-
-        {/* Block 2 — The Cost of the Problem */}
-        <ProblemSection />
-
-        {/* Block 3 — The Integrated System (steps + services) */}
-        <IntegratedSystemSection />
-
-        {/* Block 4 — Selected Live Work */}
-        <PortfolioSection />
-
-        {/* Block 5 — How the Engagement Works */}
-        <HowItWorksSection />
-
-        {/* Block 6 — Final Diagnostic CTA */}
-        <ClosingCTASection />
-      </main>
-
+    <main dir="rtl" lang="he">
+      <Nav />
+      <HeroBlock />
+      <ProblemBlock />
+      <ProofBlock />
+      <SystemBlock />
+      <ProcessBlock />
+      <CTABlock />
       <Footer />
-
-      {/* Mobile-only fixed bottom WhatsApp CTA */}
-      <MobileStickyCTA />
-    </div>
+    </main>
   );
 }

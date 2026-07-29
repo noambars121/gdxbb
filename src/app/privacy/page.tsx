@@ -9,22 +9,22 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-paper text-text font-hebrew flex items-center justify-center px-4 py-20">
-      <div className="max-w-xl w-full text-center flex flex-col items-center gap-6 bg-surface border border-line rounded-xl shadow-card p-8 sm:p-12">
-        <h1 className="text-3xl sm:text-4xl font-bold text-text">מדיניות פרטיות</h1>
+    <main className="min-h-screen bg-paper text-brand-text font-sans flex items-center justify-center px-4 py-20">
+      <div className="max-w-xl w-full text-center flex flex-col items-center gap-6 bg-surface border border-brand-line rounded-xl shadow-md p-8 sm:p-12">
+        <h1 className="text-3xl sm:text-4xl font-bold text-brand-text">מדיניות פרטיות</h1>
 
-        <p className="text-muted leading-relaxed">
+        <p className="text-brand-muted leading-relaxed">
           הנוסח המלא של מדיניות הפרטיות טרם פורסם, ויעלה לעמוד זה לאחר אישורו.
         </p>
 
-        <p className="text-muted text-sm leading-relaxed">
+        <p className="text-brand-muted text-body-sm leading-relaxed">
           פנייה דרך האתר מתבצעת ישירות ב-WhatsApp או אימייל. מידע שנמסר בפנייה ישמש לצורך
           מתן מענה בלבד.
         </p>
 
         <Link
           href="/"
-          className="text-accent-blue-ink hover:text-text underline underline-offset-4 transition-colors"
+          className="text-brand-blue hover:text-brand-text underline underline-offset-4 transition-colors"
         >
           חזרה לדף הבית
         </Link>
