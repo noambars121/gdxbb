@@ -21,7 +21,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#F7F5F2',
+  themeColor: '#F7F4EE',
 };
 
 export const metadata: Metadata = {
@@ -57,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl" className={`${heebo.variable} ${inter.variable}`}>
-      <body className="bg-page text-ink font-hebrew antialiased selection:bg-accent-cyan selection:text-ink">
+      <body className="bg-paper text-text font-hebrew antialiased selection:bg-accent-blue selection:text-ink">
         {children}
         {gaMeasurementId ? (
           <>

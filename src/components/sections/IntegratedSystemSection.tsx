@@ -69,76 +69,76 @@ export const IntegratedSystemSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-page border-t border-line">
+    <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-paper">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="inline-block text-xs font-semibold text-accent-cyan-ink bg-accent-cyan/10 border border-accent-cyan/30 px-3 py-1 rounded-full uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-block text-xs font-semibold text-accent-blue-ink tracking-wider uppercase">
             הפתרון המשולב
           </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-ink mt-4">
+          <h2 className="text-2xl sm:text-4xl font-bold text-text mt-3">
             כך בונים אתר שעובד בשביל העסק
           </h2>
         </div>
 
-        {/* 4-step flow — horizontal on desktop, vertical on mobile */}
-        <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <li
-                key={step.num}
-                className="bg-card border border-line p-6 sm:p-8 rounded-xl shadow-card hover:shadow-card-hover hover:border-accent-cyan-ink/40 transition-all duration-300 group"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 bg-accent-cyan/10 border border-accent-cyan/30 rounded-xl text-accent-cyan-ink">
-                    <Icon className="w-6 h-6" aria-hidden="true" />
+        {/* 4-step flow — single ink-soft panel with blue markers + gold connector */}
+        <div className="bg-ink-soft rounded-2xl px-6 py-8 sm:px-10 sm:py-10 mb-12">
+          <ol className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+            {/* Restrained gold connecting line — desktop only */}
+            <div
+              aria-hidden="true"
+              className="hidden lg:block absolute top-5 right-[12.5%] left-[12.5%] h-px bg-accent-gold/35"
+            />
+
+            {steps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <li key={step.num} className="relative flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      aria-hidden="true"
+                      className="flex items-center justify-center w-10 h-10 rounded-full bg-accent-blue/15 border border-accent-blue/40 text-accent-blue text-sm font-bold shrink-0"
+                    >
+                      {step.num}
+                    </span>
+                    <div className="p-2 rounded-lg text-accent-blue">
+                      <Icon className="w-5 h-5" aria-hidden="true" />
+                    </div>
                   </div>
-                  <span
-                    aria-hidden="true"
-                    className="font-sans font-extrabold text-3xl text-line group-hover:text-accent-cyan-ink/50 transition-colors"
-                  >
-                    {step.num}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-ink mb-2">{step.title}</h3>
-                <p className="text-ink-secondary text-sm sm:text-base leading-relaxed">
-                  {step.description}
-                </p>
-              </li>
-            );
-          })}
-        </ol>
+                  <h3 className="text-lg font-bold text-paper mb-2">{step.title}</h3>
+                  <p className="text-paper/60 text-sm sm:text-base leading-relaxed">
+                    {step.description}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
 
         {/* Partnership attribution */}
-        <div className="max-w-2xl mx-auto mb-16 text-center border-y border-accent-gold/40 py-5">
-          <p className="text-sm sm:text-base text-ink leading-relaxed">
+        <div className="max-w-2xl mx-auto mb-14 text-center border-y border-accent-gold/30 py-5">
+          <p className="text-sm sm:text-base text-text leading-relaxed">
             <span className="font-semibold">Gemini Digital</span> מובילים את אסטרטגיית
             ההמרה והמסרים.
           </p>
-          <p className="text-sm sm:text-base text-ink leading-relaxed">
+          <p className="text-sm sm:text-base text-text leading-relaxed">
             <span className="font-semibold">BarsBuild</span> בונים את המערכת הדיגיטלית
             שמוציאה אותה לפועל.
           </p>
         </div>
 
-        {/* Services grid — compact 2×2 */}
+        {/* Services grid — compact 2×2 on paper */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {services.map((service, idx) => {
             const Icon = service.icon;
             return (
-              <div
-                key={idx}
-                className="bg-card border border-line p-6 rounded-xl shadow-card hover:shadow-card-hover hover:border-accent-cyan-ink/40 transition-all duration-300 flex items-start gap-4"
-              >
-                <div className="p-3 bg-accent-cyan/10 border border-accent-cyan/30 rounded-xl text-accent-cyan-ink shrink-0">
-                  <Icon className="w-6 h-6" aria-hidden="true" />
+              <div key={idx} className="flex items-start gap-4">
+                <div className="p-2.5 rounded-lg text-accent-blue shrink-0">
+                  <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-ink mb-1">{service.title}</h3>
-                  <p className="text-ink-secondary text-sm leading-relaxed">
-                    {service.description}
-                  </p>
+                  <h3 className="text-lg font-bold text-text mb-1">{service.title}</h3>
+                  <p className="text-muted text-sm leading-relaxed">{service.description}</p>
                 </div>
               </div>
             );
@@ -146,7 +146,7 @@ export const IntegratedSystemSection: React.FC = () => {
         </div>
 
         {/* Expansion note */}
-        <p className="text-center text-sm text-ink-secondary max-w-2xl mx-auto mt-8 leading-relaxed">
+        <p className="text-center text-sm text-muted max-w-2xl mx-auto mt-8 leading-relaxed">
           כשהעסק מוכן לכך — פרסום, SEO, CRM ואוטומציה, על בסיס תשתית שכבר בנויה נכון.
         </p>
       </div>

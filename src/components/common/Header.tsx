@@ -6,7 +6,7 @@ import { SITE_CONFIG } from '@/config/site';
 
 export const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-page/85 border-b border-line transition-colors duration-200">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-paper/90 border-b border-line transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         {/* Typographic Brand Lockup */}
         <a
@@ -15,15 +15,15 @@ export const Header: React.FC = () => {
           aria-label="Gemini Digital x BarsBuild דף הבית"
         >
           <div className="flex flex-col">
-            <span className="font-sans font-bold text-lg sm:text-xl tracking-tight text-ink group-hover:text-accent-cyan-ink transition-colors whitespace-nowrap">
+            <span className="font-sans font-bold text-lg sm:text-xl tracking-tight text-text group-hover:text-accent-blue-ink transition-colors whitespace-nowrap">
               <span className="sm:hidden">
-                GD <span className="text-accent-gold-ink font-light">×</span> BB
+                GD <span className="text-accent-gold font-light">×</span> BB
               </span>
               <span className="hidden sm:inline">
-                Gemini Digital <span className="text-accent-gold-ink font-light">×</span> BarsBuild
+                Gemini Digital <span className="text-accent-gold font-light">×</span> BarsBuild
               </span>
             </span>
-            <span className="hidden sm:block text-xs text-ink-secondary font-hebrew">
+            <span className="hidden sm:block text-xs text-muted font-hebrew">
               {SITE_CONFIG.categoryLabel}
             </span>
           </div>
@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
             <a
               key={item.href}
               href={item.href}
-              className="hidden md:inline-block text-sm font-medium text-ink-secondary hover:text-ink transition-colors"
+              className="hidden md:inline-block text-sm font-medium text-muted hover:text-text transition-colors"
             >
               {item.label}
             </a>

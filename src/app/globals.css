@@ -3,48 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  /* Design tokens — rebuild brief v2.0.0, Section 1.1 */
+  /* Design tokens — dev_2.1 Dark Authority Hybrid */
   :root {
-    --bg-primary: #f7f5f2;
-    --bg-card: #ffffff;
-    --bg-footer: #0f1623;
-    --text-primary: #1a2035;
-    --text-secondary: #4a5568;
-    --accent-cyan: #00c2ff;
-    --accent-gold: #c9a84c;
-    --border: #e2e0dc;
-    --shadow: rgba(26, 32, 53, 0.08);
+    --ink: #111827;
+    --ink-soft: #1c2636;
+    --paper: #f7f4ee;
+    --surface: #ffffff;
+    --text: #172033;
+    --muted: #5e6878;
+    --blue: #38bdf8;
+    --gold: #d6ad55;
+    --line: #dcd7ce;
+    --footer: #090e17;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--paper);
+    color: var(--text);
     font-family: var(--font-heebo), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
   }
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--paper);
+    color: var(--text);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Keyboard focus outline — darkened cyan for AA contrast on light surfaces */
+  /* Keyboard focus — blue-ink for AA contrast on light surfaces */
   *:focus-visible {
-    outline: 2px solid #006b99;
+    outline: 2px solid #0369a1;
     outline-offset: 4px;
     border-radius: 4px;
   }
 
-  /* Anchor targets clear the sticky header (h-20) when navigated to */
   section[id] {
     scroll-margin-top: 5.5rem;
   }
 }
 
-/* Reduced Motion Respect */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -60,17 +59,16 @@
   }
 }
 
-/* Custom Scrollbar — light, unobtrusive */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: var(--paper);
 }
 ::-webkit-scrollbar-thumb {
   background: #cfccc5;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #006b99;
+  background: #0369a1;
 }

@@ -14,6 +14,8 @@ interface CTAButtonProps {
   type?: 'whatsapp' | 'email';
   /** Analytics placement context, e.g. hero / header / closing. */
   location: string;
+  /** When true, secondary/outline styles adapt for dark (--ink) backgrounds. */
+  onDark?: boolean;
   className?: string;
 }
 
@@ -24,6 +26,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   label,
   type = 'whatsapp',
   location,
+  onDark = false,
   className = '',
 }) => {
   const whatsappHref = useWhatsAppHref();
@@ -38,8 +41,9 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     });
   };
 
-  const baseStyles =
-    'inline-flex items-center justify-center font-bold transition-all duration-200 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan-ink focus-visible:ring-offset-2 focus-visible:ring-offset-page active:scale-[0.98]';
+  const ringOffset = onDark ? 'focus-visible:ring-offset-ink' : 'focus-visible:ring-offset-paper';
+
+  const baseStyles = `inline-flex items-center justify-center font-bold transition-all duration-200 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue-ink ${ringOffset} focus-visible:ring-offset-2 active:scale-[0.98]`;
 
   const sizeStyles = {
     sm: 'px-4 py-2 text-sm gap-2',
@@ -47,13 +51,14 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     lg: 'px-6 sm:px-8 py-4 text-base sm:text-lg gap-3',
   };
 
-  /* Deep-navy text on the cyan CTA — white on #00C2FF fails WCAG AA (brief §1.2). */
   const variantStyles = {
-    primary: 'bg-accent-cyan hover:bg-accent-cyan-active text-ink shadow-cta',
-    secondary:
-      'bg-card hover:bg-page text-ink border border-line hover:border-accent-cyan-ink shadow-card font-medium',
-    outline:
-      'bg-transparent hover:bg-card text-ink border border-line hover:border-accent-cyan-ink font-medium',
+    primary: 'bg-accent-blue hover:bg-accent-blue-hover text-ink shadow-cta',
+    secondary: onDark
+      ? 'bg-transparent hover:bg-white/5 text-paper/90 border border-paper/25 hover:border-paper/40 font-medium'
+      : 'bg-surface hover:bg-paper text-text border border-line hover:border-accent-blue-ink shadow-card font-medium',
+    outline: onDark
+      ? 'bg-transparent hover:bg-white/5 text-paper/80 border border-paper/20 hover:border-paper/35 font-medium'
+      : 'bg-transparent hover:bg-surface text-text border border-line hover:border-accent-blue-ink font-medium',
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';

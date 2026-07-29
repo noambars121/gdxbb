@@ -17,23 +17,23 @@ export const PortfolioSection: React.FC = () => {
   const secondary = SITE_CONFIG.portfolio.filter((p) => !p.featured);
 
   return (
-    <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 bg-card border-t border-line">
+    <section id="portfolio" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-paper">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/15 border border-accent-gold/40 text-accent-gold-ink text-xs font-semibold uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 text-accent-gold-ink text-xs font-semibold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
             <span>הוכחות בשטח</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-bold text-ink">
+          <h2 className="text-2xl sm:text-4xl font-bold text-text">
             לא תבניות. לא הבטחות. פרויקטים חיים.
           </h2>
         </div>
 
-        {/* Featured Projects — full-width on mobile, 3-up on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featured.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
+        {/* Featured Projects — surface cards on paper */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {featured.map((item, idx) => (
+            <PortfolioCard key={item.id} item={item} dominant={idx === 0} />
           ))}
         </div>
 
@@ -44,7 +44,7 @@ export const PortfolioSection: React.FC = () => {
             onClick={() => setShowSecondary((prev) => !prev)}
             aria-expanded={showSecondary}
             aria-controls="secondary-projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent-cyan-ink hover:text-ink underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan-ink rounded-md px-2 py-1"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-accent-blue-ink hover:text-text underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue-ink rounded-md px-2 py-1"
           >
             <span>{showSecondary ? 'הסתרת הפרויקטים הנוספים' : 'עוד פרויקטים'}</span>
             {showSecondary ? (
@@ -57,7 +57,7 @@ export const PortfolioSection: React.FC = () => {
           {showSecondary && (
             <div
               id="secondary-projects"
-              className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto mt-8 text-right"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto mt-8 text-right"
             >
               {secondary.map((item) => (
                 <PortfolioCard key={item.id} item={item} />

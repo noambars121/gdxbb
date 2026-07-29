@@ -9,19 +9,17 @@ import { ExternalLink, Globe, Sparkles } from 'lucide-react';
 
 interface PortfolioCardProps {
   item: PortfolioItem;
+  /** First featured card gets a larger, more dominant image treatment. */
+  dominant?: boolean;
 }
 
-export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
+export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, dominant = false }) => {
   const [imageError, setImageError] = useState(false);
 
-  // Extract plain domain for clean display
   const displayDomain = item.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
   return (
-    <div className="group relative bg-card border border-line rounded-xl overflow-hidden shadow-card hover:shadow-card-hover hover:border-accent-cyan-ink/40 transition-all duration-300 flex flex-col h-full">
-      {/* Thumbnail Area with Fallback — clickable to match the hover overlay affordance.
-          Removed from the tab/AT order since the labeled action link below is the
-          canonical link for this card. */}
+    <div className="group relative bg-surface border border-line/70 rounded-xl overflow-hidden shadow-card hover:shadow-card-hover hover:border-accent-blue/25 transition-all duration-300 flex flex-col h-full">
       <a
         href={item.url}
         target="_blank"
@@ -36,7 +34,9 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
             ...getUtmParams(),
           })
         }
-        className="relative aspect-[16/10] w-full bg-page border-b border-line overflow-hidden flex items-center justify-center"
+        className={`relative w-full bg-paper border-b border-line/70 overflow-hidden flex items-center justify-center ${
+          dominant ? 'aspect-[16/9]' : 'aspect-[16/10]'
+        }`}
       >
         {!imageError && item.image ? (
           <img
@@ -50,73 +50,65 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
             onError={() => setImageError(true)}
           />
         ) : (
-          /* Typographic light fallback panel — real project details only */
-          <div className="w-full h-full p-6 flex flex-col justify-between bg-gradient-to-br from-page via-card to-page text-right relative overflow-hidden">
+          <div className="w-full h-full p-4 flex flex-col justify-between bg-gradient-to-br from-paper via-surface to-paper text-right relative overflow-hidden">
             <div className="flex items-center justify-between z-10">
-              <span className="text-xs font-sans font-semibold text-accent-cyan-ink bg-accent-cyan/10 border border-accent-cyan/30 px-2.5 py-1 rounded-full">
+              <span className="text-xs font-sans font-semibold text-accent-blue-ink bg-accent-blue/10 px-2.5 py-1 rounded-full">
                 {displayDomain}
               </span>
               <Globe
-                className="w-5 h-5 text-ink-secondary/60 group-hover:text-accent-cyan-ink transition-colors"
+                className="w-5 h-5 text-muted/60 group-hover:text-accent-blue-ink transition-colors"
                 aria-hidden="true"
               />
             </div>
 
             <div className="z-10 my-auto">
-              <div className="font-sans font-bold text-xl text-ink">{item.titleEn}</div>
-              <p className="text-sm font-hebrew text-ink-secondary font-medium mt-1">
-                {item.title}
-              </p>
+              <div className="font-sans font-bold text-xl text-text">{item.titleEn}</div>
+              <p className="text-sm font-hebrew text-muted font-medium mt-1">{item.title}</p>
             </div>
 
-            <div className="flex items-center gap-1 text-xs text-ink-secondary z-10">
+            <div className="flex items-center gap-1 text-xs text-muted z-10">
               <Sparkles className="w-3.5 h-3.5 text-accent-gold-ink" aria-hidden="true" />
               <span>אתר חי</span>
             </div>
           </div>
         )}
 
-        {/* Hover overlay button indicator */}
-        <div className="absolute inset-0 bg-ink/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-          <span className="inline-flex items-center gap-2 bg-accent-cyan text-ink px-4 py-2 rounded-xl text-sm font-bold shadow-cta">
+        <div className="absolute inset-0 bg-text/30 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <span className="inline-flex items-center gap-2 bg-accent-blue text-ink px-4 py-2 rounded-xl text-sm font-bold shadow-cta">
             <span>צפייה באתר החי</span>
             <ExternalLink className="w-4 h-4" aria-hidden="true" />
           </span>
         </div>
       </a>
 
-      {/* Card Details */}
-      <div className="p-6 flex flex-col justify-between flex-grow">
+      {/* Card Details — reduced padding */}
+      <div className="p-4 flex flex-col justify-between flex-grow">
         <div>
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-xs text-accent-cyan-ink font-semibold bg-accent-cyan/10 px-2.5 py-0.5 rounded-full border border-accent-cyan/30">
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <span className="text-xs text-accent-blue-ink font-semibold bg-accent-blue/10 px-2 py-0.5 rounded-full">
               {item.category}
             </span>
-            <span className="text-xs text-ink-secondary font-sans">{displayDomain}</span>
+            <span className="text-xs text-muted font-sans">{displayDomain}</span>
           </div>
 
-          <h3 className="text-xl font-bold text-ink mb-0.5">{item.title}</h3>
-          <p className="text-sm font-sans text-ink-secondary mb-2">{item.titleEn}</p>
+          <h3 className="text-lg font-bold text-text mb-0.5">{item.title}</h3>
+          <p className="text-sm font-sans text-muted mb-1.5">{item.titleEn}</p>
 
-          <p className="text-sm text-ink-secondary leading-relaxed mb-4">
-            {item.description}
-          </p>
+          <p className="text-sm text-muted leading-relaxed mb-3">{item.description}</p>
         </div>
 
         <div>
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-5">
+          <div className="flex flex-wrap gap-1.5 mb-3">
             {item.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs text-ink-secondary bg-page border border-line px-2 py-0.5 rounded-md"
+                className="text-xs text-muted bg-paper px-2 py-0.5 rounded-md"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* Action Link */}
           <a
             href={item.url}
             target="_blank"
@@ -130,10 +122,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ item }) => {
               })
             }
             aria-label={`פתיחת האתר ${item.title} בכרטיסייה חדשה`}
-            className="inline-flex items-center justify-between w-full text-sm font-medium text-ink hover:text-accent-cyan-ink bg-page hover:bg-card border border-line hover:border-accent-cyan-ink/50 px-4 py-2.5 rounded-xl transition-all"
+            className="inline-flex items-center justify-between w-full text-sm font-medium text-text hover:text-accent-blue-ink bg-paper hover:bg-surface border border-line/70 hover:border-accent-blue/30 px-3 py-2 rounded-xl transition-all"
           >
             <span>ביקור באתר החי</span>
-            <ExternalLink className="w-4 h-4 text-accent-cyan-ink" aria-hidden="true" />
+            <ExternalLink className="w-4 h-4 text-accent-blue-ink" aria-hidden="true" />
           </a>
         </div>
       </div>

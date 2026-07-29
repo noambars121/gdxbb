@@ -11,12 +11,12 @@ import { ClosingCTASection } from '@/components/sections/ClosingCTASection';
 
 /**
  * Six conversion blocks + footer (rebuild brief v2.0.0, Section 2).
- * Section backgrounds alternate between --bg-primary and white (§1.4);
- * the footer is the only dark surface.
+ * Dark authority hybrid (dev_2.1): ink at entry, system, process, and close;
+ * paper/surface for explanation and proof; footer at #090E17.
  */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-page text-ink flex flex-col font-hebrew pb-[calc(6rem_+_env(safe-area-inset-bottom))] md:pb-0">
+    <div className="min-h-screen bg-paper text-text flex flex-col font-hebrew pb-[calc(6rem_+_env(safe-area-inset-bottom))] md:pb-0">
       <Header />
 
       <main className="flex-grow">
